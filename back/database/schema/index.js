@@ -79,7 +79,7 @@ module.exports = {
         timestamps: true
     }),
 
-    Reviews: connect.sequelize.define('Reviews', {
+    Reviews_Companies: connect.sequelize.define('Reviews_Companies', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -110,52 +110,52 @@ module.exports = {
         timestamps: true
     }),
 
-    //
-    // Room: connect.sequelize.define('Room', {
-    //     id: {
-    //         allowNull: false,
-    //         autoIncrement: true,
-    //         primaryKey: true,
-    //         type: Sequelize.DataTypes.INTEGER
-    //     },
-    //     UserId: {
-    //         type: Sequelize.DataTypes.INTEGER,
-    //         allowNull: false,
-    //     },
-    //     name: {
-    //         type: DataTypes.STRING,
-    //         allowNull: false,
-    //     },
-    // }, {
-    //     timestamps: true,
-    //     sequelize,
-    //     modelName: 'Room',
-    // }),
-    //
-    // UserRoom: connect.sequelize.define('UserRoom', {
-    //     id: {
-    //         allowNull: false,
-    //         autoIncrement: true,
-    //         primaryKey: true,
-    //         type: Sequelize.DataTypes.INTEGER
-    //     },
-    //     UserId: {
-    //         type: Sequelize.DataTypes.INTEGER,
-    //         allowNull: false,
-    //     },
-    //     RoomId: {
-    //         type: Sequelize.DataTypes.INTEGER,
-    //         allowNull: false,
-    //     },
-    //     status: {
-    //         type: Sequelize.DataTypes.BOOLEAN,
-    //         allowNull: false,
-    //     },
-    // }, {
-    //     timestamps: true,
-    //     sequelize,
-    //     modelName: 'UserRoom',
-    // }),
+    Videos: connect.sequelize.define('Videos', {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.DataTypes.INTEGER
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        src: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+    }, {
+        timestamps: true
+    }),
+
+    Videos_Reviews: connect.sequelize.define('Videos_Reviews', {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.DataTypes.INTEGER
+        },
+        UserId: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        VideoId: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        rating: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        text: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+    }, {
+        timestamps: true
+    }),
+
 
 
 

@@ -7,7 +7,11 @@ console.log('START MIGRATIONS');
 const {
     belongsToAuthTokenUser,
     hasManyCompanyPositions,
-    hasManyCompanyReviews
+    hasManyCompanyReviews,
+    hasManyVideosReviews,
+    hasOneReviewsCompany,
+    hasOneReviewsPosition,
+    hasOneReviewsUser,
 
 } = require('../schema/connections')
 

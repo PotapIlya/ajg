@@ -18,7 +18,7 @@
 
           <div v-if="formInputCompany">
             <label>
-              <input type="text" placeholder="Завести компанию">
+              <input v-model="selectNewCompany" type="text" placeholder="Завести компанию">
             </label>
           </div>
 
@@ -39,7 +39,7 @@
 
           <div v-if="formInputPosition">
             <label>
-              <input type="text" placeholder="Завести должность">
+              <input v-model="selectNewPosition" type="text" placeholder="Завести должность">
             </label>
           </div>
 
@@ -63,8 +63,13 @@
       </div>
 
       <ul v-if="listReviews.length" class="col-6">
-        <li v-for="reviews in listReviews">
-          {{ reviews.label }}
+        <li v-for="review in listReviews">
+          <p>User => {{ review.User.name }}</p>
+          <p>Company => {{ review.Company.name }}</p>
+          <p>Position => {{ review.Position.name }}</p>
+          <p>rating => {{ review.rating }}</p>
+          <p>text => {{ review.text }}</p>
+          <hr>
         </li>
       </ul>
     </div>
@@ -74,22 +79,25 @@
     export default {
       name: "index",
       async fetch() {
-        const data = await this.$axios.get('/company/all');
-        this.selectCompany = data.data[0].id;
-        this.arrayCompany = data.data;
+        const reviews = await this.$axios.get('/reviews/all');
+        const company = await this.$axios.get('/company/all');
+
+        this.listReviews = reviews.data;
+        this.selectCompany = company.data[0].id;
+        this.arrayCompany = company.data;
       },
       data: () => ({
         arrayCompany: [],
         selectCompany: '',
+        selectNewCompany: '',
         formInputCompany: false,
 
         arrayPosition: [],
         selectPosition: '',
+        selectNewPosition: '',
         formInputPosition: false,
 
-        listReviews: [
-          { label: '1231' }
-        ],
+        listReviews: [],
         inputRating: 5,
         textReviews: '',
       }),
@@ -122,11 +130,14 @@
         send(){
           this.$axios.post('/reviews/create', {
             'companyId' : this.selectCompany,
+            'newCompanyInput' : this.selectNewCompany,
             'positionId' : this.selectPosition,
+            'newPositionInput' : this.selectNewPosition,
             'inputRating' : this.inputRating,
             'textReviews' : this.textReviews,
           }).then(res => {
             console.log(res.data)
+
           }).catch(e => {
             console.log(e.response)
           })
